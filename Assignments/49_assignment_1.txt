@@ -1,0 +1,306 @@
+ASSIGNMENT-1
+
+	PROGRAM-1: C program to find the sum of 'n' numbers.
+	
+	Roll No: 49
+	Name: Saran S Krishnan
+
+#include<stdio.h>
+
+int main()
+{
+	int elem,sum;
+	printf("Enter the range:");
+	scanf("%d",&elem);
+	int num[elem];
+	printf("Enter %d values:\n",elem);
+	for(int i=0;i<elem;i++)
+	{
+		scanf("%d",&num[i]);
+	}
+	for(int i=0;i<elem;i++)
+	{
+		sum=sum+num[i];
+	}
+	printf("Sum of numbers is %d\n",sum);
+	return 0;
+}
+
+______________________________________________________
+	
+	PROGRAM-2: C program to merge two sorted arrays.
+	
+	Roll No: 49
+	Name: Saran S Krishnan
+	
+	
+#include <stdio.h>
+
+void display(int arr[], int size)
+{
+	for(int i = 0 ; i < size; i++)
+	{
+		printf("%d\t",arr[i]);
+	}
+	printf("\n");
+}
+
+void insert_elements(int arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+}
+
+void sort_array(int arr[], int size)
+{
+    for (int i = 0; i < size - 1; i++)
+    {
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void merge_arrays(int arr1[], int size1, int arr2[], int size2, int merged[])
+{
+    int i = 0, j = 0, k = 0;
+
+    while (i < size1 && j < size2)
+    {
+        if (arr1[i] < arr2[j])
+        {
+            merged[k++] = arr1[i++];
+        } 
+        else
+        {
+            merged[k++] = arr2[j++];
+        }
+    }
+
+    while (i < size1)
+    {
+        merged[k++] = arr1[i++];
+    }
+    while (j < size2)
+    {
+        merged[k++] = arr2[j++];
+    }
+}
+
+int main()
+{
+    int size1, size2;
+    printf("Enter the size of the first array: ");
+    scanf("%d", &size1);
+    
+    int array1[size1];
+    insert_elements(array1, size1);
+	printf("UnSorted Array is:\n ");
+	display(array1, size1);
+    printf("Enter the size of the second array: ");
+    scanf("%d", &size2);
+    
+    int array2[size2];
+    insert_elements(array2, size2);
+	printf("UnSorted Array is: ");
+	display(array2, size2);
+
+    int merged[size1 + size2];
+    merge_arrays(array1, size1, array2, size2, merged);
+
+	printf("Merged UnSorted Array is: \n");
+	display(merged, size1 + size2);
+
+ 	sort_array(array1, size1);
+    sort_array(array2, size2); 
+	printf("Sorted Array1 is:\n ");
+	display(array1, size1);
+	printf("Sorted Array2 is:\n ");
+	display(array2, size2);
+    
+    sort_array(merged, size1 + size2);
+    printf("Sorted merged array: ");
+	display(merged, size1 + size2);
+
+
+    return 0;
+}
+______________________________________________________
+	PROGRAM-3: C program to create a STACK using array data structure and implement the operations PUSH, POP and TRAVESE.
+	
+	Roll No: 49
+	Name: Saran S Krishnan
+	
+	
+#include <stdio.h>
+#include <stdlib.h>
+
+int top = -1, size = 5, item, arr_stack[10];
+
+void push()
+{
+    if(top >= size - 1)
+    {
+        printf("Overflow\n");
+    }
+    else
+    {
+    printf("Enter your Item\t");
+    scanf("%d",&item);
+    top++;
+    arr_stack[top] = item;
+    }
+}
+
+void pop()
+{
+    if(top < 0)
+    {
+        printf("Empty Stack\n");
+    }
+    else
+    {
+        item = arr_stack[top];
+        printf("popped item is %d\n",item);
+        top--;
+    }
+}
+
+void display()
+{
+    for(int i = 0; i <= top; i++)
+    {
+        printf("%d\t",arr_stack[i]);
+    }
+    printf("\n");
+}
+
+
+
+int main()
+{
+    int choice;
+    printf("You've got a Stack of Size 5\n");
+    while(choice!= 4)
+    {
+    	printf("1.Push\t 2.Pop\t 3.Display\t 4.Exit\t\n");
+    	scanf("%d",&choice);
+        switch(choice)
+        {
+        	case 1:
+        	    push();
+        	    break;
+        	case 2:
+            	pop();
+            	break;
+        	case 3:
+            	display();
+            	break;
+        	case 4:
+            return 0;
+            
+        	default:
+            printf("Invalid Choice\n");
+            break;
+        }
+    }
+    return 0;
+}
+______________________________________________________
+
+	PROGRAM-4: C program to create a QUEUE using array data structure and implement the operations ENQUEUE, DEQUEUE and TRAVERSE.
+	
+	Roll No: 49
+	Name: Saran S Krishnan
+	
+	
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int front = 0, rear = -1, size = 5, item, arr_queue[5];
+
+void enqueue()
+{
+    if(rear >= size - 1)
+    {
+        printf("Overflow\n");
+    }
+    else
+    {
+        printf("Enter your Item: ");
+        scanf("%d",&item);
+        rear++;
+        arr_queue[rear] = item;
+    }
+}
+
+void dequeue()
+{
+    if(front > rear)
+    {
+        printf("Underflow (Queue is Empty)\n");
+    }
+    else
+    {
+        item = arr_queue[front];
+        printf("dequeued item is %d\n", item);
+        front++;
+    }
+}
+
+void display()
+{
+    if(front > rear)
+    {
+        printf("Queue is Empty\n");
+    } else 
+    {
+        printf("Queue: ");
+        for(int i = front; i <= rear; i++)
+        {
+            printf("%d\t", arr_queue[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    int choice;
+    printf("You've got a Queue of Size %d\n", size);
+    while(choice != 4)
+    {
+        printf("1.enqueue\t 2.dequeue\t 3.Display\t 4.Exit\n");
+        scanf("%d", &choice);
+        switch(choice)
+        {
+            case 1:
+                enqueue();
+                break;
+            case 2:
+                dequeue();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid Choice\n");
+                break;
+        }
+    }
+    return 0;
+}
+_______________________________________________________
+
